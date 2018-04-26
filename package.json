@@ -30,11 +30,13 @@
 		"webpack-dev-server": "^2.9.4"
 	},
 	"dependencies": {
+		"axios": "^0.18.0",
 		"fs": "0.0.1-security",
 		"path": "^0.12.7",
 		"react": "^16.0.0",
 		"react-dom": "^16.0.0",
 		"react-router-dom": "^4.2.2",
+		"react-youtube": "^7.6.0",
 		"webpack-merge": "^4.1.1"
 	}
 }
