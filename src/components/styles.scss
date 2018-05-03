@@ -1,0 +1,30 @@
+.playlist-container {
+	width: 1067px;
+	overflow: scroll;
+	white-space: nowrap;
+	.thumbnail-container {
+		display: inline-block;
+		margin-right: 5px;
+		position: relative;
+		width: 355px;
+		height: 265px;
+		background: rgba(0, 0, 0, 0.4);
+
+		.video-thumbnail {
+			width: 355px;
+			position: relative;
+			z-index: -1;
+		}
+		.video-title {
+			position: relative;
+			bottom: 30px;
+			color: white;
+			text-shadow: 0 0 3px #000000;
+			font-size: 18px;
+			display: block;
+			overflow: hidden;
+			width: 89%;
+			margin-left: 5px;
+		}
+	}
+}
