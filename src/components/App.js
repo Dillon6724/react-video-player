@@ -17,6 +17,13 @@ export default class App extends Component {
 		this._onEnd = this._onEnd.bind(this);
 		this._onPlay = this._onPlay.bind(this);
 		this._onStateChange = this._onStateChange.bind(this);
+		this.onChangeVideo = this.onChangeVideo.bind(this);
+	}
+	onChangeVideo(id, event) {
+		event.preventDefault();
+		this.setState({
+			currentVideo: id
+		});
 	}
 
 	// REACT LIFE CYCLE METHODS
@@ -67,7 +74,10 @@ export default class App extends Component {
 					onPlay={this._onPlay}
 					onStateChange={this._onStateChange}
 				/>
-				<PlaylistContatiner playlistData={this.state.playlistData} />
+				<PlaylistContatiner
+					onChangeVideo={this.onChangeVideo}
+					playlistData={this.state.playlistData}
+				/>
 			</div>
 		);
 	}

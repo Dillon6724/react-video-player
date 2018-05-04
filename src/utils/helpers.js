@@ -22,7 +22,8 @@ const helpers = {
 		height: '600px',
 		width: '1070px',
 		playerVars: {
-			autoplay: 1
+			autoplay: 1,
+			automute: 1
 		}
 	}
 };

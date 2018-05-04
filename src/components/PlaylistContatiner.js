@@ -5,7 +5,13 @@ export default class PlaylistContatiner extends Component {
 		return (
 			<div className="playlist-section-container">
 				{this.props.playlistData.map((playlist, i) => {
-					return <Playlist key={i} playlist={playlist} />;
+					return (
+						<Playlist
+							onChangeVideo={this.props.onChangeVideo}
+							key={i}
+							playlist={playlist}
+						/>
+					);
 				})}
 			</div>
 		);
