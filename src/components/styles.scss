@@ -4,18 +4,20 @@ body {
 	padding: 0;
 }
 .playlist-container {
+	display: inline-block;
 	height: 276px;
 	width: 1070px;
 	overflow: scroll;
 	white-space: nowrap;
-	margin-top: 20px;
+	position: relative;
+	right: 46px;
 	.thumbnail-container {
 		display: inline-block;
 		margin-right: 5px;
 		position: relative;
-		width: 355px;
-		height: 265px;
-		background: rgba(0, 0, 0, 0.5);
+		// width: 355px;
+		// height: 265px;
+		background: rgba(0, 0, 0, 0.3);
 		vertical-align: top;
 		&:hover {
 			background: rgba(0, 0, 0, 0);
@@ -39,4 +41,22 @@ body {
 			text-align: center;
 		}
 	}
+}
+
+.l-arrow,
+.r-arrow {
+	position: relative;
+	height: 266px;
+	width: 50px;
+	background-color: black;
+	display: inline-block;
+	bottom: 10px;
+}
+.l-arrow {
+	left: 0px;
+	background: linear-gradient(to left, rgba(255, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+.r-arrow {
+	right: 96px;
+	background: linear-gradient(to right, rgba(255, 0, 0, 0), rgba(0, 0, 0, 1));
 }
