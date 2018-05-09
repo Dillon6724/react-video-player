@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
 import Thumbnail from './Thumbnail';
+import Slider from 'react-slick';
 
 export default class Playlist extends Component {
 	render() {
+		var settings = {
+			arrows: true,
+			accessability: true,
+			infinite: true,
+			speed: 500,
+			slidesToShow: 3,
+			slidesToScroll: 1
+		};
 		return (
-			<div className="playlist-container">
+			<Slider {...settings}>
 				{this.props.playlist.map((video, i) => {
 					return (
 						<Thumbnail
@@ -14,7 +23,7 @@ export default class Playlist extends Component {
 						/>
 					);
 				})}
-			</div>
+			</Slider>
 		);
 	}
 }

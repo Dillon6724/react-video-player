@@ -20,7 +20,7 @@ const helpers = {
 
 	opts: {
 		height: '600px',
-		width: '1070px',
+		width: '100%',
 		playerVars: {
 			autoplay: 1,
 			automute: 1

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import YouTube from 'react-youtube';
 import helpers from '../utils/helpers';
 import PlaylistContatiner from './PlaylistContatiner';
@@ -99,7 +99,7 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<div>
+			<Fragment>
 				<YouTube
 					opts={helpers.opts}
 					videoId={this.state.currentVideo}
@@ -112,7 +112,7 @@ export default class App extends Component {
 					onChangeVideo={this.onChangeVideo}
 					playlistData={this.state.playlistData}
 				/>
-			</div>
+			</Fragment>
 		);
 	}
 }

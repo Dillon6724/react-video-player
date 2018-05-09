@@ -1,20 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Playlist from './Playlist';
 export default class PlaylistContatiner extends Component {
 	render() {
 		return (
-			<div className="playlist-section-container">
+			<div className="playlist-container">
 				{this.props.playlistData.map((playlist, i) => {
 					return (
-						<div>
-							<div className="l-arrow" />
-							<Playlist
-								onChangeVideo={this.props.onChangeVideo}
-								key={i}
-								playlist={playlist}
-							/>
-							<div className="r-arrow" />
-						</div>
+						<Playlist
+							onChangeVideo={this.props.onChangeVideo}
+							key={i}
+							playlist={playlist}
+						/>
 					);
 				})}
 			</div>
