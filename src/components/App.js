@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import ReactDOM from 'react-dom';
 import YouTube from 'react-youtube';
 import helpers from '../utils/helpers';
 import PlaylistContatiner from './PlaylistContatiner';
@@ -9,8 +10,9 @@ export default class App extends Component {
 		super(props);
 		this.state = {
 			currentVideo: '',
-			playlistData: [],
-			playing: true
+			playlistArray: [],
+			playing: true,
+			title: ''
 		};
 
 		this._onPause = this._onPause.bind(this);
@@ -22,25 +24,30 @@ export default class App extends Component {
 	}
 
 	// CUSTOM METHODS
-	onChangeVideo(id, event) {
+	onChangeVideo(id, newTitle, event) {
 		event.preventDefault();
 		this.setState({
-			currentVideo: id
+			currentVideo: id,
+			title: newTitle
 		});
+		ReactDOM.findDOMNode(this.refs.videoPlayer).focus();
 	}
 
 	playNextVideo(event) {
 		const currentVideoId = this.state.currentVideo;
-		this.state.playlistData.forEach((playlist, playlistIndex) => {
-			playlist.forEach((video, videoIndex) => {
-				const nextVideoId = this.state.playlistData[playlistIndex][videoIndex]
-					.snippet.resourceId.videoId;
+		this.state.playlistArray.forEach((playlist, playlistIndex) => {
+			playlist.playlistArray.forEach((video, videoIndex) => {
+				console.log(this.state.playlistArray[playlistIndex]);
+				const nextVideoId = this.state.playlistArray[playlistIndex]
+					.playlistArray[videoIndex].snippet.resourceId.videoId;
 				if (currentVideoId === nextVideoId) {
 					const newIndex = this.getNewIndex(videoIndex, playlistIndex);
 					this.setState({
-						currentVideo: this.state.playlistData[newIndex.playlist][
+						currentVideo: this.state.playlistArray[newIndex.playlist]
+							.playlistArray[newIndex.video].snippet.resourceId.videoId,
+						title: this.state.playlistArray[newIndex.playlist].playlistArray[
 							newIndex.video
-						].snippet.resourceId.videoId
+						].snippet.title
 					});
 				}
 			});
@@ -49,8 +56,9 @@ export default class App extends Component {
 
 	getNewIndex(videoIndex, playlistIndex) {
 		const totalVideos =
-			Object.keys(this.state.playlistData[playlistIndex]).length - 1;
-		const totalPlaylists = this.state.playlistData.length - 1;
+			Object.keys(this.state.playlistArray[playlistIndex].playlistArray)
+				.length - 1;
+		const totalPlaylists = this.state.playlistArray.length - 1;
 		if (videoIndex + 1 <= totalVideos) {
 			videoIndex++;
 			return { playlist: playlistIndex, video: videoIndex };
@@ -64,15 +72,17 @@ export default class App extends Component {
 
 	// REACT LIFE CYCLE METHODS
 	componentDidMount() {
-		const playlistData = helpers
+		helpers
 			.getPlaylistData(
-				this.props.customPlayerOptions.playlistIds,
+				this.props.customPlayerOptions.playlistConfig,
 				this.props.customPlayerOptions.apiKey
 			)
-			.then(playlistData => {
+			.then(playlistArray => {
 				this.setState({
-					playlistData,
-					currentVideo: playlistData[0][0].snippet.resourceId.videoId
+					playlistArray,
+					currentVideo:
+						playlistArray[0].playlistArray[0].snippet.resourceId.videoId,
+					title: playlistArray[0].playlistArray[0].snippet.title
 				});
 			});
 	}
@@ -107,10 +117,12 @@ export default class App extends Component {
 					onEnd={this._onEnd}
 					onPlay={this._onPlay}
 					onStateChange={this._onStateChange}
+					ref="videoPlayer"
 				/>
 				<PlaylistContatiner
 					onChangeVideo={this.onChangeVideo}
-					playlistData={this.state.playlistData}
+					playlistArray={this.state.playlistArray}
+					title={this.state.title}
 				/>
 			</Fragment>
 		);

@@ -1,18 +1,25 @@
 import axios from 'axios';
 
 const helpers = {
-	async getPlaylistData(playlistIds, apiKey) {
+	async getPlaylistData(playlistInfo, apiKey) {
 		const allPlaylistData = await Promise.all(
-			playlistIds.map(async playlistId => {
+			playlistInfo.map(async playlistObj => {
 				const res = await axios.get(
-					`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&fields=items&maxResults=50&playlistId=${playlistId}&key=${apiKey}`
+					`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&fields=items&maxResults=50&playlistId=${
+						playlistObj.playlistId
+					}&key=${apiKey}`
 				);
-				return await res.data.items.filter(item => {
+				const filteredData = res.data.items.filter(item => {
 					if (!item.snippet.thumbnails) {
 						return false;
 					}
 					return true;
 				});
+				const formattedPlaylist = {
+					playlistTitle: playlistObj.playlistTitle,
+					playlistArray: filteredData
+				};
+				return await formattedPlaylist;
 			})
 		);
 		return allPlaylistData;

@@ -8,22 +8,34 @@ export default class Thumbnail extends Component {
 		const title = this.props.videoInfo.snippet.title;
 
 		return (
-			<a href="#">
+			<a className="link" href="#">
 				<img
 					className="video-thumbnail"
-					src={this.props.videoInfo.snippet.thumbnails.high.url}
-					onClick={this.props.onChangeVideo.bind(this, newId)}
+					src={this.props.videoInfo.snippet.thumbnails.medium.url}
+					onClick={this.props.onChangeVideo.bind(
+						this,
+						newId,
+						this.props.videoInfo.snippet.title
+					)}
 				/>
 				{title.length < 53 ? (
 					<span
 						className="video-title"
-						onClick={this.props.onChangeVideo.bind(this, newId)}>
+						onClick={this.props.onChangeVideo.bind(
+							this,
+							newId,
+							this.props.videoInfo.snippet.title
+						)}>
 						{title}
 					</span>
 				) : (
 					<span
 						className="video-title"
-						onClick={this.props.onChangeVideo.bind(this, newId)}>
+						onClick={this.props.onChangeVideo.bind(
+							this,
+							newId,
+							this.props.videoInfo.snippet.title
+						)}>
 						{formattedTitle}
 					</span>
 				)}
