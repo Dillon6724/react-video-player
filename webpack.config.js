@@ -11,7 +11,6 @@ const commonConfig = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',
-		publicPath: '/'
 	},
 	devServer: {
 		contentBase: './src'
@@ -45,7 +44,6 @@ const commonConfig = {
 if (prod) {
 	module.exports = merge(commonConfig, {
 		output: {
-			publicPath: '/'
 		}
 	});
 } else {

@@ -15,6 +15,8 @@ export default class App extends Component {
 			title: ''
 		};
 
+		this.playlist = React.createRef();
+
 		this._onPause = this._onPause.bind(this);
 		this._onPlay = this._onPlay.bind(this);
 		this._onStateChange = this._onStateChange.bind(this);
@@ -24,20 +26,18 @@ export default class App extends Component {
 	}
 
 	// CUSTOM METHODS
-	onChangeVideo(id, newTitle, event) {
-		event.preventDefault();
+	onChangeVideo(id, newTitle) {
 		this.setState({
 			currentVideo: id,
-			title: newTitle
+			title: newTitle,
+			focusOnPlayer: true
 		});
-		ReactDOM.findDOMNode(this.refs.videoPlayer).focus();
 	}
 
 	playNextVideo(event) {
 		const currentVideoId = this.state.currentVideo;
 		this.state.playlistArray.forEach((playlist, playlistIndex) => {
 			playlist.playlistArray.forEach((video, videoIndex) => {
-				console.log(this.state.playlistArray[playlistIndex]);
 				const nextVideoId = this.state.playlistArray[playlistIndex]
 					.playlistArray[videoIndex].snippet.resourceId.videoId;
 				if (currentVideoId === nextVideoId) {
@@ -101,6 +101,7 @@ export default class App extends Component {
 	_onStateChange(event) {
 		if (event.data === 5 && this.state.playing) {
 			event.target.playVideo();
+			event.target.muteVideo();
 		}
 		if (event.data === 0) {
 			this.playNextVideo(event);
@@ -109,7 +110,7 @@ export default class App extends Component {
 
 	render() {
 		return (
-			<Fragment>
+			<div>
 				<YouTube
 					opts={helpers.opts}
 					videoId={this.state.currentVideo}
@@ -117,14 +118,19 @@ export default class App extends Component {
 					onEnd={this._onEnd}
 					onPlay={this._onPlay}
 					onStateChange={this._onStateChange}
-					ref="videoPlayer"
+					ref={player => {
+						this.player = player;
+					}}
 				/>
 				<PlaylistContatiner
 					onChangeVideo={this.onChangeVideo}
 					playlistArray={this.state.playlistArray}
 					title={this.state.title}
+					focus={this.focus}
+					ref={this.playlist}
+					currentVideo={this.state.currentVideo}
 				/>
-			</Fragment>
+			</div>
 		);
 	}
 }
