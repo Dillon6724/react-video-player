@@ -27,9 +27,9 @@ export default class Thumbnail extends Component {
 					src={this.props.videoInfo.snippet.thumbnails.medium.url}
 				/>
 				{title.length < 53 ? (
-					<span className={`video-title${hidden}`}>{title}</span>
+					<span className={`video-title ${hidden}`}>{title}</span>
 				) : (
-					<span className={`video-title${hidden}`}>{formattedTitle}</span>
+					<span className={`video-title ${hidden}`}>{formattedTitle}</span>
 				)}
 				{hidden.length > 1 ? (
 					<span className="playing-title">NOW PLAYING</span>

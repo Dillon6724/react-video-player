@@ -10,7 +10,7 @@ const commonConfig = {
 	entry: ['babel-polyfill', './src/index.js'],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'bundle.js',
+		filename: 'bundle.js'
 	},
 	devServer: {
 		contentBase: './src'
@@ -30,6 +30,10 @@ const commonConfig = {
 			{
 				test: /\.(css|sass|scss)$/,
 				use: ['style-loader', 'css-loader', 'sass-loader']
+			},
+			{
+				test: /\.(png|jpg|gif|woff|ttf|eot|svg)$/,
+				use: ['url-loader', 'file-loader']
 			}
 		]
 	},
@@ -43,8 +47,7 @@ const commonConfig = {
 
 if (prod) {
 	module.exports = merge(commonConfig, {
-		output: {
-		}
+		output: {}
 	});
 } else {
 	module.exports = merge(commonConfig, {
