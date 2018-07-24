@@ -15,10 +15,18 @@ export default class Playlist extends Component {
 			slide: 'li',
 			responsive: [
 				{
-					breakpoint: 690,
+					breakpoint: 1199,
 					settings: {
 						slidesToShow: 2,
 						slidesToScroll: 2,
+						infinite: true
+					}
+				},
+				{
+					breakpoint: 720,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
 						infinite: true
 					}
 				}

@@ -96,15 +96,15 @@ export default class App extends Component {
 	}
 
 	_onPlay(event) {
+		console.log('playin');
 		event.target.playVideo();
 	}
 
 	_onStateChange(event) {
-		if (event.data === 5 && this.state.playing) {
-			event.target.playVideo();
-			event.target.muteVideo();
-		}
-		if (event.data === 0) {
+		if (event.data === -1 && this.state.playing) {
+			console.log(this.state);
+			event.target.mute();
+		} else if (event.data === 0) {
 			this.playNextVideo(event);
 		}
 	}

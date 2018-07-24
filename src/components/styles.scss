@@ -26,7 +26,7 @@ body {
 .title {
 	color: black;
 	text-align: center;
-	margin: 0px 0 40px;
+	margin: 8px 0 40px;
 	font-size: 40px;
 }
 
@@ -47,9 +47,9 @@ body {
 
 .video-thumbnail {
 	cursor: pointer;
-	filter: brightness(60%);
+	filter: brightness(42%);
 	&:hover {
-		filter: brightness(95%);
+		filter: brightness(75%);
 	}
 }
 
@@ -61,12 +61,13 @@ body {
 	z-index: 9;
 	display: block;
 	position: relative;
-	bottom: 53px;
+	bottom: 63px;
 	left: 1px;
 	text-align: center;
-	padding: 0px 15px;
 	font-weight: bold;
-	font-size: 17px;
+	font-size: 18px;
+	width: 92%;
+	padding: 0px 7px;
 }
 
 .ed-slider {
@@ -80,6 +81,7 @@ body {
 	color: black;
 	position: relative;
 	bottom: 26px;
+	right: 4px;
 }
 
 .slick-prev:before,
@@ -107,9 +109,9 @@ body {
 .hidden {
 	display: none;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1199px) {
 	iframe {
-		height: 350px;
+		height: 390px;
 	}
 
 	.title {
@@ -122,12 +124,15 @@ body {
 	}
 
 	.video-title {
-		bottom: 85px;
+		bottom: 160px;
+		font-size: 20px;
+	}
+	.playing-title {
+		bottom: 130px;
 	}
 
 	.playlist-container {
-		width: 80%;
-		padding: 1% 10%;
+		width: 88%;
 	}
 
 	.slick-slide {
@@ -136,20 +141,38 @@ body {
 
 	.slick-next:before,
 	[dir='rtl'] .slick-prev:before {
-		font-size: 35px;
+		font-size: 63px;
 		bottom: 26px;
+		right: -7px;
 	}
 
 	.slick-prev:before,
 	[dir='rtl'] .slick-prev:before {
-		font-size: 35px;
+		font-size: 63px;
 		bottom: 26px;
 		right: 15px;
 	}
 
-	@media only screen and (max-width: 690px) {
+	@media only screen and (max-width: 767px) {
 		iframe {
 			height: 220px;
+		}
+		.playlist-container {
+			width: 84%;
+		}
+		.title {
+			font-size: 20px;
+		}
+
+		.video-title {
+			margin-top: 9px;
+			width: 100%;
+			padding: 0;
+		}
+
+		.slick-prev:before,
+		[dir='rtl'] .slick-prev:before {
+			right: 50px;
 		}
 	}
 }
